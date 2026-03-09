@@ -4,6 +4,9 @@ extrn ExitProcess : proc        ; Declare external function ExitProcess
 
 numbers QWORD 1,82,4,9,17,214,0,52
 
+sum qword 0
+n qword 0
+
 .CODE                           ; Directive: Enter .code section
 
 main PROC                       ; Directive: Begin function labeled `main`
@@ -11,6 +14,17 @@ main PROC                       ; Directive: Begin function labeled `main`
     sub rsp, 28h                ; Bump 8 bytes to ensure 16 byte alignment. Reserve 32 bytes shadow space.
     ; -------------------- /\ PROLOGUE /\ --------------------
 
+    Whileloop:
+
+        cmp n, 105
+        Jge Endloop
+
+        add n, 5
+        add sum, n
+
+        Jmp Whileloop
+
+    Endloop:
 
 
     ; -------------------- \/ EPILOGUE \/ --------------------
